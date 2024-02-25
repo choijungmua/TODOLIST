@@ -1,10 +1,19 @@
-const toDoForm = document.getElementById("todo-form");
-const toDoInput = document.querySelector("#todo-form input");
-const toDoList = document.getElementById("todo-list");
+const todoForm = document.getElementById("todo-form");
+const todoInput = document.querySelector("#todo-form input");
+const todoList = document.getElementById("todo-list");
 
-function handleTodoSubmit(event) {
-  event.preventDefault();
-  const newTodo = toDoInput.value;
-  toDoInput.value = "";
+function paintTodo(Todo) {
+  const li = document.createElement("li");
+  const span = document.createElement("span");
+  li.appendChild(span);
+  span.innerText = Todo;
+  todoList.appendChild(li);
 }
-toDoForm.addEventListener("submit", handleTodoSubmit);
+
+function handleToDoSubmit(event) {
+  event.preventDefault();
+  let newTodo = todoInput.value;
+  todoInput.value = "";
+  paintTodo(newTodo);
+}
+todoForm.addEventListener("submit", handleToDoSubmit);
