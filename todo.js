@@ -7,6 +7,12 @@ function deleteToDo(event) {
   li.remove();
 }
 
+//저장하기
+const todos = [];
+const TODOS_KEY = "todos";
+function saveToDos() {
+  localStorage.setItem(TODOS_KEY, JSON.stringify(todos));
+}
 //화면에 그리기
 function paintTodo(Todo) {
   const li = document.createElement("li");
@@ -27,6 +33,15 @@ function handleToDoSubmit(event) {
   event.preventDefault();
   let newTodo = todoInput.value;
   todoInput.value = "";
+  todos.push(newTodo);
   paintTodo(newTodo);
+  saveToDos();
 }
 todoForm.addEventListener("submit", handleToDoSubmit);
+
+const savedToDos = localStorage.getItem(TODOS_KEY);
+
+if (savedToDos !== null) {
+  const parsedToDos = JSON.parse(savedToDos);
+  parsedToDos.forEach((item) => console.log(item));
+}
